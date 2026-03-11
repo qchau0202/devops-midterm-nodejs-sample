@@ -1,1 +1,7 @@
 node_modules
+*.env
+*.idea
+*.builds
+*.logs
+*.uploads
+*.secrets
