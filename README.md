@@ -36,7 +36,7 @@ Nếu bạn muốn kết nối MongoDB có username/password, chỉnh `MONGO_URI
 1. Cài dependencies:
 
 ```bash
-cd /Users/mvmanh/Desktop/api
+cd /sample-midterm-node.js-project
 npm install
 ```
 
@@ -77,15 +77,3 @@ Lưu ý: UI trên trang chủ sử dụng fetch + FormData để gửi file, nê
 **Giới hạn & khuyến nghị**
 - Hiện tại server cho phép upload file và lưu trực tiếp trên đĩa — phù hợp cho demo và môi trường dev, nhưng không tối ưu cho production (về backup, scale và băng thông). Với môi trường production, nên dùng lưu trữ cloud (S3/Cloudinary) và chỉ lưu URL trong DB.
 - Thêm giới hạn kích thước file và kiểm tra MIME type nếu bạn muốn an toàn hơn. Tôi có thể thêm cấu hình `multer` để giới hạn kích thước (ví dụ 2MB) và whitelist `image/*`.
-
-**Một số lệnh tiện ích**
-- Cài thêm `nodemon` global (nếu muốn): `npm i -g nodemon`.
-- Xem log server (stdout) để biết liệu app đang dùng `mongodb` hay `in-memory`.
-
-**Tôi có thể giúp tiếp**
-- Thêm giới hạn kích thước file và kiểm tra MIME type.
-- Hoặc chuyển lưu trữ ảnh sang S3/Cloudinary (cần credentials).
-- Thêm trang chi tiết sản phẩm hoặc phân trang cho danh sách.
-
-Nếu bạn muốn tôi cập nhật README để ghi rõ cách migrate dữ liệu, cách reset uploads hoặc ví dụ cụ thể hơn, cho biết yêu cầu cụ thể và tôi sẽ bổ sung.
-

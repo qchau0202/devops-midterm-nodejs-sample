@@ -1,8 +1,10 @@
 node_modules
+package-lock.json
+dist/
+.DS_Store
 *.env
 *.idea
 *.builds
 *.logs
 *.uploads
 *.secrets
-*.test_pullrequest
