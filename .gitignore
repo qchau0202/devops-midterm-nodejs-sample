@@ -1,11 +1,10 @@
 node_modules
-.env
-public/uploads/
 package-lock.json
-build/
 dist/
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+*.env
+*.idea
+*.builds
+*.logs
+*.uploads
+*.secrets
