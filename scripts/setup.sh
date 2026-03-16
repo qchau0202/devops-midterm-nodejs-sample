@@ -27,3 +27,17 @@ log "Updating Ubuntu packages..."
 DEBIAN_FRONTEND=noninteractive apt-get update -yqq #&& apt-get upgrade -yqq (Upgrade can cause issues in some environments, so it's commented out for now)
 log "Installing necessary OS packages..."
 DEBIAN_FRONTEND=noninteractive apt-get install -yqq curl wget git build-essential
+
+# 3. Install Runtimes
+log "Installing Node.js..."
+curl -fsSL https://deb.nodesource.com/setup_18.x | bash - > dev/null #Only logs the error if the setup script fails, otherwise it will be silent
+
+log "Installing Node.js packages..."
+DEBIAN_FRONTEND=noninteractive apt-get install -yqq nodejs 
+
+log "Node.js version: $(node -v)"
+log "npm version: $(npm -v)"
+
+# 4. Creating Necessary Directories
+log "Creating necessary directories..."
+mkdir -p "$base_dir"
