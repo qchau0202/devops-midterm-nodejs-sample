@@ -30,7 +30,7 @@ DEBIAN_FRONTEND=noninteractive apt-get install -yqq curl wget git build-essentia
 
 # 3. Install Runtimes
 log "Installing Node.js..."
-curl -fsSL https://deb.nodesource.com/setup_18.x | bash - > /dev/null 2>&1 #Only logs the error if the setup script fails, otherwise it will be silent
+curl -fsSL https://deb.nodesource.com/setup_18.x | bash - > dev/null #Only logs the error if the setup script fails, otherwise it will be silent
 
 log "Installing Node.js packages..."
 DEBIAN_FRONTEND=noninteractive apt-get install -yqq nodejs 
