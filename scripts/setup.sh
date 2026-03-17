@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-set -e euo pipefail
+set -euo pipefail
 
-LOG_FILE="${"/var/log/setup.log"}"
+LOG_FILE="/var/log/setup.log"
 
-touch "${LOG_FILE}" || {echo "Run this script with appropriate permissions"; exit 1;}
+touch "${LOG_FILE}" || { echo "Run this script with appropriate permissions"; exit 1; }
 
 log() {
     local message="${1}"
