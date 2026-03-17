@@ -41,3 +41,4 @@ log "npm version: $(npm -v)"
 # 4. Creating Necessary Directories
 log "Creating necessary directories..."
 mkdir -p "$base_dir"
+DEBIAN_FRONTEND=noninteractive apt-get install -yqq curl wget git build-essential
