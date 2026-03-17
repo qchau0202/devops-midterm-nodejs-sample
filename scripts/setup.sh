@@ -14,9 +14,12 @@ log "Starting setup script..."
 log "Starting Environment Setup..."
 
 # 1.No Hardcoded Secrets
-if [ -f ".env" ]; then
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ENV_FILE="${SCRIPT_DIR}/../.env"
+
+if [ -f "${ENV_FILE}" ]; then
     log "Found .env file. Loading environment variables from .env file..."
-    export $(grep -v '^#' .env | xargs)
+    export $(grep -v '^#' "${ENV_FILE}" | xargs)
 else 
     log "No .env file found. Please create a .env file with the necessary environment variables."
     exit 1
