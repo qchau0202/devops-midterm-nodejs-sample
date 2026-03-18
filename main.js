@@ -37,7 +37,7 @@ async function start() {
     await mongoose.connect(mongoUri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 3000
+      serverSelectionTimeoutMS: 200000
     });
     usingMongo = true;
     console.log('Connected to MongoDB — using mongodb as data source.');
