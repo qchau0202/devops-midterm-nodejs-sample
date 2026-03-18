@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-set -e euo pipefail
+set -euo pipefail
 
-LOG_FILE="${"/var/log/setup.log"}"
+LOG_FILE="/var/log/setup.log"
 
-touch "${LOG_FILE}" || {echo "Run this script with appropriate permissions"; exit 1;}
+touch "${LOG_FILE}" || { echo "Run this script with appropriate permissions"; exit 1; }
 
 log() {
     local message="${1}"
@@ -14,9 +14,12 @@ log "Starting setup script..."
 log "Starting Environment Setup..."
 
 # 1.No Hardcoded Secrets
-if [ -f ".env" ]; then
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ENV_FILE="${SCRIPT_DIR}/../.env"
+
+if [ -f "${ENV_FILE}" ]; then
     log "Found .env file. Loading environment variables from .env file..."
-    export $(grep -v '^#' .env | xargs)
+    export $(grep -v '^#' "${ENV_FILE}" | xargs)
 else 
     log "No .env file found. Please create a .env file with the necessary environment variables."
     exit 1
@@ -40,5 +43,27 @@ log "npm version: $(npm -v)"
 
 # 4. Creating Necessary Directories
 log "Creating necessary directories..."
-mkdir -p "$base_dir"
-DEBIAN_FRONTEND=noninteractive apt-get install -yqq curl wget git build-essential
+APP_DIR="/opt/my_app"
+LOG_DIR="/var/log/my_app"
+
+log "Creating application directory structure..."
+mkdir -p "${APP_DIR}/public/uploads"
+log "Application directory structure created at ${APP_DIR}/public/uploads"
+
+log "Creating log directory..."
+mkdir -p "${LOG_DIR}"
+log "Log directory created at ${LOG_DIR}"
+
+if [[ -d "${LOG_DIR}" && -w "${LOG_DIR}" ]]; then
+    log "Log directory is writable."
+else
+    log "Log directory is not writable. Please check permissions."
+    exit 1
+fi
+
+log "Setting directory permissions..."
+APP_USER="${SUDO_USER:-root}"
+chown -R "${APP_USER}":"${APP_USER}" "${APP_DIR}" "${LOG_DIR}"
+log "Directory permissions set for user ${APP_USER}."
+
+log "Environment setup completed successfully."
