@@ -23,6 +23,8 @@ services:
       MONGO_URI: mongodb://devops-ltc-mongodb:27017/products_db
     ports:
       - "3000:3000"
+    volumes:
+      - uploads-data:/app/public/uploads
     depends_on:
       devops-ltc-mongodb:
         condition: service_healthy
@@ -30,3 +32,4 @@ services:
 
 volumes:
   devops-ltc-mongodb:
+  uploads-data:
