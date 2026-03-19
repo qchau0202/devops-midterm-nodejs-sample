@@ -13,12 +13,19 @@ log() {
 log "Starting setup script..."
 log "Starting Environment Setup..."
 
-# 1. Load .env
-if [ -f ".env" ]; then
-    log "Found .env file. Loading environment variables..."
-    export $(grep -v '^#' .env | xargs)
+# 1. Load .env from the parent directory of this script
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PARENT_DIR="$(dirname "$SCRIPT_DIR")"
+ENV_PATH="$PARENT_DIR/.env"
+
+if [ -f "$ENV_PATH" ]; then
+    log "Found .env file at $ENV_PATH. Loading..."
+    # Using 'set -a' is a cleaner way to export all variables in a file
+    set -a
+    source "$ENV_PATH"
+    set +a
 else
-    log "No .env file found. Please create one."
+    log "No .env file found at $ENV_PATH. Please create one."
     exit 1
 fi
 
